@@ -1,8 +1,17 @@
 # Train-Consist-Management-App
-Drawback of UC2 Approach
-In UC2, bogies are stored in a List. However, a List allows duplicate values, which is dangerous in a railway system.
-For example, two bogies could accidentally be registered with the same ID:
-BG101, BG101
-This violates business rules and can cause inconsistent train formation.
-To enforce uniqueness, we introduce the Set data structure.
+Drawback of UC3 Approach
+In UC3, we ensured the uniqueness of bogie IDs using HashSet.
+While this solves duplication, it introduces a new problem:
+
+HashSet does not preserve order.
+A train consist must follow a physical sequence:
+Locomotive → Passenger → Cargo → Guard Coach.
+
+
+With HashSet, the arrangement becomes unpredictable, which is unacceptable for real-world train formation.
+So, we need a structure that:
+✔ Maintains insertion order
+✔ Supports fast insertion/removal
+✔ Models real train chaining
+This leads us to LinkedList.
 
