@@ -1,24 +1,43 @@
- import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
-        public class TrainConsistManagementApp {
+public class TrainConsistManagementApp {
 
-            public static void main(String[] args) {
-                System.out.println("=== Train Consist Management App ===");
+    // Bogie class representing passenger bogies
+    static class Bogie {
+        String name;
+        int capacity;
 
-                // Initialize LinkedHashSet for train formation
-                LinkedHashSet<String> trainFormation = new LinkedHashSet<>();
-
-                // Attach bogies
-                trainFormation.add("Engine");
-                trainFormation.add("Sleeper");
-                trainFormation.add("Cargo");
-                trainFormation.add("Guard");
-
-                // Attempt to attach a duplicate bogie (Sleeper)
-                trainFormation.add("Sleeper"); // will be ignored automatically
-
-                // Display the final train formation
-                System.out.println("\nTrain Formation (Insertion Order Preserved, No Duplicates):");
-                System.out.println(trainFormation);
-            }
+        Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
         }
+
+        @Override
+        public String toString() {
+            return name + " (Capacity: " + capacity + ")";
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("=== Train Consist Management App ===");
+
+        // Create a list of passenger bogies
+        List<Bogie> bogies = new ArrayList<>();
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 60));
+        bogies.add(new Bogie("First Class", 40));
+
+        // Display original list
+        System.out.println("\nOriginal Bogie List:");
+        bogies.forEach(System.out::println);
+
+        // Sort bogies by capacity using Comparator
+        bogies.sort(Comparator.comparingInt(b -> b.capacity));
+
+        // Display sorted list
+        System.out.println("\nSorted Bogie List by Capacity:");
+        bogies.forEach(System.out::println);
+    }
+}
